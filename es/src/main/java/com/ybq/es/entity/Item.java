@@ -1,5 +1,6 @@
 package com.ybq.es.entity;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -9,7 +10,17 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  * @author 87661
  */
 @Document(indexName = "item",type = "docs", shards = 1, replicas = 0)
+@Data
 public class Item {
+
+    public Item(Long id, String title, String category, String brand, Double price, String images) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.brand = brand;
+        this.price = price;
+        this.images = images;
+    }
 
     /**
      * @Description: @Id注解必须是springframework包下的
@@ -46,6 +57,6 @@ public class Item {
     /**
      * 图片地址
      */
-    @Field(index = false, type = FieldType.Keyword)
+    @Field(index = true, type = FieldType.Keyword)
     private String images;
 }
